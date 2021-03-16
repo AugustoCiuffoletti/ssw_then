@@ -1,19 +1,25 @@
 import './style.css';
 
 const appDiv: HTMLElement = document.getElementById('app');
+const outDiv: HTMLElement = document.getElementById("output");
 appDiv.innerHTML = `<h1>Un esempio di <i>promise<i></h1>`;
 
 // Definisco una funzione sleep che restituisce una Promise
 // che si risolve dopo un certo intervallo parametrizzato
-function sleep(ms) { 
-  return new Promise((resolve,reject) => {
-    setTimeout(resolve, ms);
+function sleep(ms, txt) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(txt), ms);
   });
 }
-console.log("Inizio");
-sleep(5000).then(() => { 		// la prima Promise si risolve dopo 5s
-  console.log("Fine primo step");
-  return(sleep(2000));   		// il metodo then ne restituisce una nuova da 2s
-}).then(() => {
-  console.log("Fine secondo step"); 	// quando anche questa si risolve concludo
-});
+// Definisco due promise per timeout e messaggi diversi
+// Lancio entrambi con await: vanno in parallelo
+// La funzione deve essere dichiarata async 
+async function prova() {
+  let step1 = sleep(3000, "Fine primo step <br>");
+  let step2 = sleep(4000, "Fine secondo step <br>");
+  outDiv.innerHTML += await step1;
+  outDiv.innerHTML += await step2;
+}
+
+outDiv.innerHTML += "Inizio <br>"
+prova().then( () => outDiv.innerHTML += "Finito" );
