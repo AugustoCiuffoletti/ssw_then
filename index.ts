@@ -1,12 +1,10 @@
-// Import stylesheets
 import './style.css';
 
-// Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
 appDiv.innerHTML = `<h1>Un esempio di <i>promise<i></h1>`;
 
 // Definisco una funzione sleep che restituisce una Promise
-// che si risolve dopo un certo intervallo
+// che si risolve dopo un certo intervallo parametrizzato
 function sleep(ms) { 
   return new Promise((resolve,reject) => {
     setTimeout(resolve, ms);
