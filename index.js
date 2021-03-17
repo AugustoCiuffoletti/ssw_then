@@ -1,6 +1,6 @@
 import './style.css';
 
-const appDiv: HTMLElement = document.getElementById('app');
+const appDiv = document.getElementById('app');
 appDiv.innerHTML = `<h1>Un esempio di <i>promise<i></h1>`;
 
 // Definisco una funzione sleep che restituisce una Promise
